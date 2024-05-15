@@ -9,11 +9,11 @@ public interface EmployeeService {
 
     EmployeeProjection getEmployee(Long id);
 
-    List<Employee> getAllEmployes();
+    List<Employee> getAllEmployees();
 
-    Employee addEmployee(Employee employee);
+    boolean addEmployee(Employee employee);
 
-    Employee updateEmployee(Employee employee);
+    boolean updateEmployee(Employee employee);
 
-    void deleteEmployee(Long id);
+    boolean deleteEmployee(Long id);
 }

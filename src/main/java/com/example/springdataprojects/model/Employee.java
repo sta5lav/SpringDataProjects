@@ -2,6 +2,7 @@ package com.example.springdataprojects.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.validation.annotation.Validated;
 
 import java.math.BigDecimal;
 

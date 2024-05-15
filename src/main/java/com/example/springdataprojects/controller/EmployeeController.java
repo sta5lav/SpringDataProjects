@@ -25,22 +25,37 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getAllEmployes() {
-        return ResponseEntity.status(HttpStatus.OK).body(employeeService.getAllEmployes());
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.getAllEmployees());
     }
 
     @PostMapping
-    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
-        return ResponseEntity.status(HttpStatus.OK).body(employeeService.addEmployee(employee));
+    public ResponseEntity<Void> addEmployee(@RequestBody Employee employee) {
+        return ResponseEntity.status(
+                employeeService.addEmployee(employee) ?
+                        HttpStatus.OK :
+                        HttpStatus.BAD_REQUEST
+
+        ).build();
     }
 
     @PutMapping
-    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
-        return ResponseEntity.status(HttpStatus.OK).body(employeeService.updateEmployee(employee));
+    public ResponseEntity<Void> updateEmployee(@RequestBody Employee employee) {
+        return ResponseEntity.status(
+                employeeService.updateEmployee(employee) ?
+                        HttpStatus.OK :
+                        HttpStatus.NOT_FOUND
+
+        ).build();
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable Long id) {
-        employeeService.deleteEmployee(id);
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
+        return ResponseEntity.status(
+                employeeService.deleteEmployee(id) ?
+                        HttpStatus.OK :
+                        HttpStatus.NOT_FOUND
+
+        ).build();
     }
 }
